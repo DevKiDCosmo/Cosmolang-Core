@@ -146,3 +146,11 @@ public void static loadAndPrintFromIndex(int idx) => ({
 });
 
 ```
+
+Easy
+```js
+public main(int argc, char *argv[]) { }
+  content = os.load(argv[i in argv os.validPath()]);
+  print(content);
+}
+```
