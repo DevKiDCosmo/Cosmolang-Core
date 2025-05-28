@@ -17,6 +17,88 @@ public class void static memory load "interup" MAIN(::main/mem::64FAT? => {
 */
 ```
 
+Prototypes
+```js
+public class void static main {
+    public static _main Main(String[] args) {
+        if (MEMORY.has64FAT()) {
+            for (int index = 0; index < MEM.length && index < args.length;) {
+                String arg = args[index];
+                if (isPrintFormat(arg)) {
+                    // Check flag condition
+                    int flag = checkFlagCondition();
+                    if (flag) {
+                        printNumber(args[index].mem.load());
+                    }
+                } else if (arg.equals("0")) {
+                    break;
+                }
+            }
+        }
+    }
+
+    private static void printNumber(int value) {
+        Ints = 0; // Assuming this initializes some array
+        Print(value);
+    }
+
+    private static boolean isPrintFormat(String arg) {
+        // Implement the PRINT format check here (regex or specific criteria)
+        return arg.matches("\\d+"); // Example: checks for digits only
+    }
+    
+    private static int checkFlagCondition() {
+        // Replace with actual condition logic, e.g., bitwise operations on a flag variable
+        volatile boolean someFlag = false; // Placeholder
+        someFlag ^= 1; // Toggle the flag each time
+        return someFlag;
+    }
+}
+
+```
+
+```js
+/**
+ * "interup" MAIN(::main/mem::64FAT? =>) is for loading something from the disk - ? abbreviation: if this memory type.
+ * Processes command-line arguments in PRINT format up to MEM limit (10).
+ * For each valid argument, loads and prints an integer from memory via i.mem.load().
+ */
+
+// Check if 64FAT memory is available; if so, run main function
+::main/mem/64FAT? => {
+    public void static _main/Main(String[] parsedArgs) => ({
+        // Print initial data using CodSin block equivalent to initializing and printing zero from memory.
+        public void stability/CodSin({
+            Ints := 0;
+            printZero(); // Assume this is a function call
+        });
+
+        // Process each argument in PRINT format up to MEM limit (10)
+        [for index in 0..MEM-1] {
+            if args[index] matches "PRINT" format and flagCondition() then {
+                loadAndPrint(index);
+            } else if args[index].equals("0") { break; }
+        });
+    });
+};
+
+public void static printZero() => ({
+    Ints := 0;
+    Print(i.mem.load());
+});
+
+// Function to check some condition (originally using EOR and THEN)
+public boolean flagCondition() => ({ volatile boolean testFlag = false; testFlag ^= 1; return testFlag; });
+
+// Function to load and print the integer from memory for a given index
+public void static loadAndPrint(int idx) => ({
+    String valueString = args[idx].mem.load();
+    int value = Integer.parseInt(valueString);
+    Print(value);
+});
+
+```
+
 New
 ```js
 // Check if 64FAT memory exists; if so, run this main function
