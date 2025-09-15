@@ -5,6 +5,8 @@
 - `<types>`: Placeholder for one or more data types (e.g., `int`, `float`, `string`, etc.). It is optional to specify types. Use `void` if no type is needed and `auto` for safe return.
 - `types`: Placeholder for one or more data types (e.g., `int`, `float`, `string`, etc.). It is mandatory to specify types.
 
+In examples there is sometimes a number in the first order of the line. It indicates the order of phrasing. The next number after the dot represents the executional order.
+
 # Basic for running sections
 
 ## `function`
@@ -17,11 +19,36 @@ function <types> functionName(param1, param2) {
 }<;>
 ```
 
-> Note: The semicolon (`;`) at the end of the function definition is optional.
+> [!Note]
+> The semicolon (`;`) at the end of the function definition is optional.
 
 ## `return`
 
 The `return` keyword is used to exit a function and optionally return a value to the caller.
+
+For safe code, use `auto` as the return type to ensure that the function always returns a value of the correct type.
+
+```cosmolang
+function <types> functionName(param1, param2) {
+    return result; // Returns a value of the specified type
+}<;>
+function auto safeFunction() {
+    return defaultValue; // Always returns a value of the correct type
+}<;>
+```
+
+For `void` use `return;` without a value.
+
+```cosmolang
+function void voidFunction() {
+    return; // Exits the function without returning a value
+}<;>
+```
+
+You don't have to use `return` in a `void` function, but you can if you want to exit early.
+
+> [!Note]
+> If you don't do it, the compiler will do it for you.
 
 ## `label:`
 A label is defined by a name followed by a colon (`:`). It is used as a target for the `goto` statement.
@@ -46,14 +73,16 @@ label1: label2: // This is not allowed
     // Code to execute when jumped to label1 or label2
 ```
 
-> Important: Labels must be unique within the same function scope.
+> [!IMPORTANT]
+> Labels must be unique within the same function scope.
 >
 > If you have multiple labels one after another, they will be executed in sequence when jumped to the first label.
 > If you don't want that, you need to jump back to the function sequentially execution.
 
-> Note: There are two sequential execution types:
-> 1. Sequential execution of a function (default behavior).
-> 2. Sequential execution of raw code (e.g. labels one after another. Also, comparable to python noob code if you don't use functions).
+> [!Note]
+> There are two sequential execution types:
+> 1. Sequential execution of a function (default behavior). Asynchrony can be guaranteed here.
+> 2. Sequential execution of raw code (e.g. labels one after another. Also, comparable to python noob code if you don't use functions). Asynchrony can be guaranteed here, but through other means like starting an asynchronous function that calls different function with gotos. Small rule of thumb: Don't use it unless you use ancient and low code.
 
 ## `goto` vs `function(...)`
 
@@ -65,15 +94,30 @@ functionName(param1, param2); // Calls another function
 ```
 
 ## Examples with all
-
 ```cosmolang
-function void exampleFunction() {};
-label: start;
-    // Code to execute
-    goto start; // Jumps to the start label
+1.- function void exampleFunction() {};
 
-label1:
-label2:
+2.- label1:
+3.- label2:
     // Code to execute when jumped to label1 it goes to label2
 
+4.1 label: start;
+5.-    // Code to execute
+6.2    exampleFunction(); // Calls the exampleFunction
+7.3    goto start; // Jumps to the start label
+
 ```
+
+# Instances
+
+## Variables
+
+## Symbols
+
+## Constants
+
+## Changeability and Mutability
+
+## Visibility
+
+## Classes and Objects
