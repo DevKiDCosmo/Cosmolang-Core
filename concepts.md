@@ -21,6 +21,33 @@ or
 instance::propertyName;
 ```
 
+```mermaid
+---
+title: Instance Call Diagram
+//config:
+  look: handDrawn
+  theme: neutral
+---
+classDiagram
+    class Instance {
+        +methodName()
+        +propertyName
+    }
+    Instance : +methodName()
+    Instance : +propertyName
+    Instance --> "1" Method : calls
+    Instance --> "1" Property : accesses
+    
+    class Method {
+        methodName()
+        void
+    }
+    class Property {
+        propertyName
+        void()
+    }
+```
+
 ## Hotloader
 
 
