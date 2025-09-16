@@ -161,13 +161,22 @@ stateDiagram
 
 ```mermaid
 ---
-title: Instances Tree
+title: Instances Tree of Inheritance and Composition
 ---
 graph LR
     A[Instances] --> B[Classes]
+    subgraph Typen
+        B[Classes]
+        D[Structs]
+        E[Interfaces]
+    end
     A --> C[Objects]
     A --> D[Structs]
     A --> E[Interfaces]
+    
+    subgraph Objects
+        C[Objects]
+    end
     
     C --> G[Properties]
     C --> H[Methods]
