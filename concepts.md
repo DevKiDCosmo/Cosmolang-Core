@@ -48,6 +48,17 @@ classDiagram
     }
 ```
 
+```mermaid
+---
+config:
+  layout: elk
+---
+flowchart TD
+    A[Instance] -->|calls| B[Method]
+    A -->|accesses| C[Property]
+    C --> D[propertyName]
+```
+
 ## Hotloader
 
 

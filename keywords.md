@@ -83,6 +83,19 @@ label1: label2: // This is not allowed
 > There are two sequential execution types:
 > 1. Sequential execution of a function (default behavior). Asynchrony can be guaranteed here.
 > 2. Sequential execution of raw code (e.g. labels one after another. Also, comparable to python noob code if you don't use functions). Asynchrony can be guaranteed here, but through other means like starting an asynchronous function that calls different function with gotos. Small rule of thumb: Don't use it unless you use ancient and low code.
+>
+> I don't like `async goto label;`. It looks weird. If you want asynchrony, use functions. Probably it will be added.
+
+### `start:`, `_start:`, `end:`, `_end:` etc.
+
+These are special labels that can be used to denote the beginning and end of a function or code block. It is especially used for the program endings and beginnings. They can be used for clarity and organization.
+
+```cosmolang
+1.2 end:
+    // Code to execute at the end
+2.1 start:
+    // Code to execute at the start
+```
 
 ## `goto` vs `function(...)`
 
@@ -108,7 +121,84 @@ functionName(param1, param2); // Calls another function
 
 ```
 
+```mermaid
+---
+title: Processing of Sequential Execution Order System (SEOS)
+---
+stateDiagram
+    [*] --> START
+    
+    START --> _start : if found
+    START --> main : std way
+    
+    main --> program : std lib
+    program --> createProcess
+    createProcess --> newThread
+    newThread --> program
+    newThread --> END
+    _start --> label0 : origin 0x__
+    _start --> main : interrupt
+    
+    program --> END
+    END --> program
+    label0 --> _end
+    END --> _end
+    _end --> END
+    program --> _end
+
+    NamedComposite: Thread Creation
+    state NamedComposite {
+        [*] --> newThread
+        newThread --> lifetimeProcessor
+        lifetimeProcessor --> killProcessor
+        killProcessor --> [*]
+    }
+    
+    END --> [*]
+```
+
 # Instances
+
+```mermaid
+---
+title: Instances Tree
+---
+graph LR
+    A[Instances] --> B[Classes]
+    A --> C[Objects]
+    A --> D[Structs]
+    A --> E[Interfaces]
+    
+    C --> G[Properties]
+    C --> H[Methods]
+    
+    H --> Z[Functions]
+    Z --> I[Static]
+    Z --> J[Virtual]
+    Z --> K[Pure Virtual]
+    Z --> L[Dynamic]
+    
+    H --> M[Operators]
+    M --> Y[Constructors]
+    M --> X[Destructors]
+
+    H --> O[Parameter]
+    O --> N[Setters]
+    O --> W[Getters]
+    
+    D --> F[Enums]
+    D --> V[Unions]
+    D --> T[Vectors, etc.]
+    D --> S[Structured Types]
+    
+    B --> Q[Inheritance]
+    B --> P[Encapsulation]
+    B --> z[Abstracted Methods]
+    z --> Z
+    
+    E --> R[Implementation]
+    E --> U[Abstraction]
+```
 
 ## Variables
 

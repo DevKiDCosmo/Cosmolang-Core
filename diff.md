@@ -1,6 +1,6 @@
 # Difference between CUBC (Common Use Base Cosmolang) and Cosmolang Core
 
-```js
+```cosmolang
 public class void static memory load "interup" MAIN(::main/mem::64FAT? => {
   public void static _main::Main(iostd::String.for(args[*]Print)) => ({
     public void stability memory SET CLI::console.Print({} => [for i in range(of PRINT in args[*][0]+)o... (=!== 0::10::stmt) in i EOR in t == THEN to ACTION]{
@@ -18,7 +18,7 @@ public class void static memory load "interup" MAIN(::main/mem::64FAT? => {
 ```
 
 Prototypes
-```js
+```cosmolang
 public class void static main {
     public static _main Main(String[] args) {
         if (MEMORY.has64FAT()) {
@@ -57,7 +57,7 @@ public class void static main {
 
 ```
 
-```js
+```cosmolang
 /**
  * "interup" MAIN(::main/mem::64FAT? =>) is for loading something from the disk - ? abbreviation: if this memory type.
  * Processes command-line arguments in PRINT format up to MEM limit (10).
@@ -100,7 +100,7 @@ public void static loadAndPrint(int idx) => ({
 ```
 
 New
-```js
+```cosmolang
 // Check if 64FAT memory exists; if so, run this main function
 ::main/mem/64FAT? => {
     public void static _main/Main(String[] parsedArgs) => ({
@@ -148,7 +148,7 @@ public void static loadAndPrintFromIndex(int idx) => ({
 ```
 
 Easy
-```js
+```cosmolang
 public main(int argc, char *argv[]) { }
   content = os.load(argv[i in argv os.validPath()]);
   print(content);
