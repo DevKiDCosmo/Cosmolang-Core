@@ -58,7 +58,7 @@ labelName:
     // Code to execute when jumped to this label
 ```
 
-Also possible is
+Also, possible is
 
 ```cosmolang
 labelName: statement; // A single statement can follow the label
@@ -121,6 +121,8 @@ functionName(param1, param2); // Calls another function
 
 ```
 
+### Processing of Sequential Execution Order System (SEOS)
+
 ```mermaid
 ---
 title: Processing of Sequential Execution Order System (SEOS)
@@ -165,7 +167,7 @@ title: Instances Tree of Inheritance and Composition
 ---
 graph LR
     A[Instances] --> B[Classes]
-    subgraph Typen
+    subgraph Types
         B[Classes]
         D[Structs]
         E[Interfaces]
@@ -196,9 +198,25 @@ graph LR
     O --> W[Getters]
     
     D --> F[Enums]
+    
+    subgraph Concept of Enum
+        F --> d[Vector]
+    end
+    
     D --> V[Unions]
+    
+    subgraph Concept of Union
+        V --> c[Variant]
+        V --> v[Size]
+    end
+    
     D --> T[Vectors, etc.]
     D --> S[Structured Types]
+    
+    subgraph Concept of Structured Types
+        S --> f[Composition]
+        S --> s[Name]
+    end
     
     B --> Q[Inheritance]
     B --> P[Encapsulation]
@@ -209,11 +227,19 @@ graph LR
     E --> U[Abstraction]
 ```
 
+Vectors are the standard array type in Cosmolang Core. They can hold multiple values of the same type and provide various methods for manipulation.
+
 ## Variables
 
-## Symbols
+## Symbols / Macros
 
 ## Constants
+
+## Inheritance
+
+Through the inheritanging of instances it is possible to copy or move data of a scope to another scope without the need of copying or moving it manually.
+
+It also allows a dynamic lifetime management of data and objects. Through new instances the heritage tree will grow and through the deletion of instances it will shrink.
 
 ## Changeability and Mutability
 
