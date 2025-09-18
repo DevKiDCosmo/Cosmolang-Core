@@ -168,7 +168,6 @@ title: Instances Tree of Inheritance and Composition
 graph LR
     A[Instances] --> B[Classes]
     subgraph Types
-        B[Classes]
         D[Structs]
         E[Interfaces]
     end
@@ -178,6 +177,20 @@ graph LR
     
     subgraph Objects
         C[Objects]
+        B[Classes]
+    end
+    
+    A-->2c
+    2c[Concepts] --> 2p
+    2c --> 2q
+    2c --> 2r
+    2c --> 2u
+    
+    subgraph Concepts
+        2p[Encapsulation]
+        2q[Inheritance]
+        2r[Implementation]
+        2u[Abstraction]
     end
     
     C --> G[Properties]
